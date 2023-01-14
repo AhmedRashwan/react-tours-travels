@@ -1,13 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import AppContext from "./AppContext";
+import Footer from "./components/Footer/Footer";
+import "./css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import About from "./pages/About/About";
+import BlogPage from "./pages/Blog/Blog";
+import SingleBlogPage from "./pages/Blog/SingleBlog";
+import ContactPage from "./pages/Contact/Contact";
+import DestinationPage from "./pages/Destination/Destination";
+import Home from "./pages/Home/Home";
+import HotelPage from "./pages/Hotel/Hotel";
+import reportWebVitals from "./reportWebVitals";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const test = "";
 root.render(
   <React.StrictMode>
-    <App />
+    <AppContext.Provider value={test}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/hotel" element={<HotelPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/blog/:id" element={<SingleBlogPage />} />
+          <Route path="/destination" element={<DestinationPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </AppContext.Provider>
   </React.StrictMode>
 );
 
